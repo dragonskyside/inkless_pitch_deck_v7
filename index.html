@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>INKLESS - Concise Pitch Deck V7</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@300;400;600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        />
+        <style>
+            /* CORE SETUP */
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                background-color: #0f172a;
+                display: grid;
+                gap: 20px;
+                grid-template-columns: 1fr;
+                margin: 0;
+                min-height: 100vh;
+                padding: 20px 0;
+                place-items: center;
+                font-family: "Inter", sans-serif;
+                color: #f8fafc;
+            }
+
+            /* SLIDE CONTAINER - CLEANER, LESS CLUTTER */
+            .slide-container {
+                background-color: #1e293b;
+                border-radius: 16px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+                display: flex;
+                flex-direction: column;
+                height: 720px;
+                overflow: hidden;
+                padding: 60px 80px; /* More side padding for focus */
+                position: relative;
+                width: 1280px;
+                border: 1px solid #334155;
+            }
+
+            /* TYPOGRAPHY - PUNCHIER */
+            h1 {
+                font-family: "Space Grotesk";
+                font-size: 90px;
+                font-weight: 700;
+                line-height: 1;
+                margin: 0;
+                color: #fff;
+            }
+            h2 {
+                font-family: "Space Grotesk";
+                font-size: 50px;
+                color: #38bdf8;
+                margin: 0 0 40px 0;
+                font-weight: 600;
+            }
+            h3 {
+                font-family: "Space Grotesk";
+                font-size: 32px;
+                color: #fff;
+                margin: 0 0 10px 0;
+            }
+            p,
+            li {
+                font-size: 24px;
+                line-height: 1.5;
+                color: #cbd5e1;
+                margin-bottom: 15px;
+            } /* Larger text */
+
+            /* UTILS */
+            .center-content {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                height: 100%;
+                text-align: center;
+            }
+            .grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 60px;
+                align-items: center;
+                height: 100%;
+            }
+            .accent {
+                color: #38bdf8;
+                font-weight: 600;
+            }
+            .card-bg {
+                background: #334155;
+                padding: 30px;
+                border-radius: 12px;
+                border: 1px solid #475569;
+            }
+
+            /* SLIDE SPECIFIC STYLES */
+
+            /* Slide 1: Title */
+            .title-slide h1 {
+                font-size: 100px;
+                background: linear-gradient(to right, #38bdf8, #818cf8);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+            .title-slide p {
+                font-size: 32px;
+                color: #94a3b8;
+                margin-top: 20px;
+            }
+            .tagline {
+                margin-top: 60px;
+                padding-top: 20px;
+                border-top: 1px solid #475569;
+                font-size: 18px;
+                color: #64748b;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+
+            /* Slide 2: Problem */
+            .problem-list li {
+                font-size: 28px;
+                margin-bottom: 30px;
+                padding-left: 40px;
+                position: relative;
+                list-style: none;
+            }
+            .problem-list li::before {
+                content: "\f00d";
+                font-family: "Font Awesome 6 Free";
+                font-weight: 900;
+                color: #f87171;
+                position: absolute;
+                left: 0;
+                top: 5px;
+                font-size: 24px;
+            }
+            .problem-img {
+                width: 100%;
+                height: 400px;
+                object-fit: cover;
+                border-radius: 12px;
+                opacity: 0.8;
+            }
+
+            /* Slide 3: Solution */
+            .solution-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+            .solution-item {
+                display: flex;
+                align-items: center;
+                gap: 20px;
+            }
+            .solution-item i {
+                font-size: 36px;
+                color: #38bdf8;
+                min-width: 50px;
+            }
+            .solution-item div {
+                font-size: 26px;
+                font-weight: 500;
+                color: #fff;
+            }
+
+            /* Slide 4: Market */
+            .market-stat {
+                text-align: center;
+                padding: 40px;
+                border: 2px solid #38bdf8;
+                border-radius: 16px;
+                background: rgba(56, 189, 248, 0.05);
+            }
+            .market-big {
+                font-family: "Space Grotesk";
+                font-size: 80px;
+                font-weight: 700;
+                color: #fff;
+                line-height: 1;
+            }
+            .market-label {
+                font-size: 24px;
+                color: #94a3b8;
+                text-transform: uppercase;
+                margin-top: 10px;
+                letter-spacing: 1px;
+            }
+            .market-arrow {
+                font-size: 40px;
+                color: #475569;
+                text-align: center;
+            }
+
+            /* Slide 5: Business Model */
+            .model-row {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 30px;
+                text-align: center;
+            }
+            .model-card {
+                padding: 40px 20px;
+                background: #334155;
+                border-radius: 16px;
+                border: 1px solid #475569;
+            }
+            .model-card h3 {
+                color: #38bdf8;
+                font-size: 36px;
+                margin-bottom: 20px;
+            }
+            .model-card .price {
+                font-size: 48px;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 10px;
+                font-family: "Space Grotesk";
+            }
+            .model-card p {
+                font-size: 18px;
+                color: #94a3b8;
+                margin: 0;
+            }
+
+            /* Slide 7: Competition */
+            .comp-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 30px;
+                padding: 20px;
+                border-radius: 8px;
+            }
+            .comp-row.us {
+                background: rgba(56, 189, 248, 0.15);
+                border: 1px solid #38bdf8;
+                transform: scale(1.05);
+            }
+            .comp-name {
+                font-size: 32px;
+                font-weight: 600;
+                width: 200px;
+            }
+            .comp-bar {
+                flex-grow: 1;
+                height: 40px;
+                background: #334155;
+                margin: 0 30px;
+                border-radius: 20px;
+                overflow: hidden;
+            }
+            .comp-fill {
+                height: 100%;
+                background: #64748b;
+            }
+            .comp-row.us .comp-fill {
+                background: #38bdf8;
+            }
+            .comp-price {
+                font-size: 32px;
+                font-weight: 700;
+                width: 150px;
+                text-align: right;
+            }
+
+            /* Slide 8: Integration */
+            .partners-grid {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+            .partner-box {
+                background: #334155;
+                padding: 30px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                font-size: 28px;
+                font-weight: 500;
+            }
+            .partner-box i {
+                color: #38bdf8;
+                font-size: 40px;
+            }
+
+            /* Slide 9: Roadmap */
+            .roadmap-steps {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 60px;
+                position: relative;
+            }
+            .roadmap-steps::before {
+                content: "";
+                position: absolute;
+                top: 20px;
+                left: 0;
+                width: 100%;
+                height: 4px;
+                background: #475569;
+                z-index: 0;
+            }
+            .step {
+                position: relative;
+                z-index: 1;
+                width: 22%;
+                text-align: center;
+            }
+            .step-dot {
+                width: 40px;
+                height: 40px;
+                background: #0f172a;
+                border: 4px solid #38bdf8;
+                border-radius: 50%;
+                margin: 0 auto 20px;
+            }
+            .step h4 {
+                color: #fff;
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+            .step p {
+                font-size: 18px;
+                color: #94a3b8;
+            }
+
+            /* Slide 11: Team */
+            .team-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+            }
+            .team-member {
+                text-align: center;
+            }
+            .team-img {
+                width: 220px;
+                height: 220px;
+                border-radius: 50%;
+                border: 4px solid #38bdf8;
+                object-fit: cover;
+                margin-bottom: 20px;
+            }
+            .team-role {
+                color: #38bdf8;
+                font-weight: 600;
+                text-transform: uppercase;
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Slide 1: Title -->
+        <div class="slide-container title-slide">
+            <div class="center-content">
+                <h1>INKLESS</h1>
+                <p>Digital Trust Infrastructure for Africa</p>
+                <div class="tagline">Raising $100k Pre-Seed</div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide-container">
+            <h2>The Problem</h2>
+            <div class="grid-2">
+                <ul class="problem-list">
+                    <li>
+                        <strong>Paper is Slow & Costly:</strong><br />Delays,
+                        printing, and courier fees.
+                    </li>
+                    <li>
+                        <strong>Global Tools are Expensive:</strong
+                        ><br />DocuSign costs $$$ (FX issues).
+                    </li>
+                    <li>
+                        <strong>Trust Deficit:</strong><br />Rampant fraud and
+                        identity theft.
+                    </li>
+                    <li>
+                        <strong>Regulatory Gaps:</strong><br />Foreign tools
+                        ignore local ID (NIN).
+                    </li>
+                </ul>
+                <img
+                    src="images/paperoffice.jpg"
+                    class="problem-img"
+                    alt="Paperwork chaos"
+                />
+            </div>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide-container">
+            <h2>The Solution: Inkless</h2>
+            <div class="grid-2">
+                <div
+                    class="center-content"
+                    style="align-items: flex-start; text-align: left"
+                >
+                    <p
+                        style="
+                            font-size: 32px;
+                            color: #fff;
+                            margin-bottom: 40px;
+                        "
+                    >
+                        Secure, localized e-signatures built for the African
+                        market.
+                    </p>
+                    <div class="solution-grid">
+                        <div class="solution-item">
+                            <i class="fa-solid fa-id-card"></i>
+                            <div>Local ID Verification (NIN)</div>
+                        </div>
+                        <div class="solution-item">
+                            <i class="fa-solid fa-gavel"></i>
+                            <div>Court Admissible</div>
+                        </div>
+                        <div class="solution-item">
+                            <i class="fa-solid fa-robot"></i>
+                            <div>AI Contract Review</div>
+                        </div>
+                        <div class="solution-item">
+                            <i class="fa-solid fa-link"></i>
+                            <div>Blockchain Audit Trail</div>
+                        </div>
+                    </div>
+                </div>
+                <img
+                    src="images/hero1.jpg"
+                    class="problem-img"
+                    style="border-left: 4px solid #38bdf8"
+                />
+            </div>
+        </div>
+
+        <!-- Slide 4: Market -->
+        <div class="slide-container">
+            <h2>The Opportunity</h2>
+            <div
+                style="
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-top: 60px;
+                "
+            >
+                <div class="market-stat">
+                    <div class="market-big">41.5M</div>
+                    <div class="market-label">MSMEs in Nigeria</div>
+                </div>
+                <div class="market-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <div class="market-stat">
+                    <div class="market-big">4.1M</div>
+                    <div class="market-label">Digitally Active</div>
+                </div>
+                <div class="market-arrow">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+                <div
+                    class="market-stat"
+                    style="border-color: #fff; background: #38bdf8"
+                >
+                    <div class="market-big">$10M-$15M</div>
+                    <div
+                        class="market-label"
+                        style="color: #0f172a; font-weight: 700"
+                    >
+                        Annual Revenue
+                    </div>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 60px; font-size: 20px">
+                Targeting just 5% of the digitally active market at $10/mo.
+            </p>
+        </div>
+
+        <!-- Slide 5: Business Model -->
+        <div class="slide-container">
+            <h2>Business Model</h2>
+            <div class="center-content">
+                <div class="model-row">
+                    <div class="model-card">
+                        <h3>SME (B2B)</h3>
+                        <div class="price">$10</div>
+                        <p>Per Month</p>
+                    </div>
+                    <div class="model-card">
+                        <h3>Enterprise</h3>
+                        <div class="price">$15 - $20</div>
+                        <p>Per User / Month</p>
+                    </div>
+                    <div class="model-card">
+                        <h3>Transactional</h3>
+                        <div class="price">$1</div>
+                        <p>Per Document</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Use Cases -->
+        <div class="slide-container">
+            <h2>Where It's Used</h2>
+            <div class="grid-2">
+                <div class="card-bg">
+                    <h3 style="color: #38bdf8">
+                        <i class="fa-solid fa-briefcase"></i> Corporate
+                    </h3>
+                    <ul style="padding-left: 20px; margin-top: 20px">
+                        <li>Employment Contracts</li>
+                        <li>Vendor Agreements</li>
+                        <li>Sales Invoices</li>
+                    </ul>
+                </div>
+                <div class="card-bg">
+                    <h3 style="color: #38bdf8">
+                        <i class="fa-solid fa-building-columns"></i> Gov & Bank
+                    </h3>
+                    <ul style="padding-left: 20px; margin-top: 20px">
+                        <li>Loan Applications</li>
+                        <li>Tax Filings</li>
+                        <li>Land Registry</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Competition -->
+        <div class="slide-container">
+            <h2>Why We Win: Price & Access</h2>
+            <div style="margin-top: 60px">
+                <div class="comp-row">
+                    <div class="comp-name">DocuSign</div>
+                    <div class="comp-bar">
+                        <div class="comp-fill" style="width: 100%"></div>
+                    </div>
+                    <div class="comp-price">$25</div>
+                </div>
+                <div class="comp-row">
+                    <div class="comp-name">Adobe</div>
+                    <div class="comp-bar">
+                        <div class="comp-fill" style="width: 88%"></div>
+                    </div>
+                    <div class="comp-price">$22</div>
+                </div>
+                <div class="comp-row us">
+                    <div class="comp-name" style="color: #0f172a">INKLESS</div>
+                    <div class="comp-bar">
+                        <div class="comp-fill" style="width: 20%"></div>
+                    </div>
+                    <div class="comp-price" style="color: #0f172a">$5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Integration -->
+        <div class="slide-container">
+            <h2>Deep Integration</h2>
+            <p style="margin-bottom: 40px">
+                We build moats through partnerships.
+            </p>
+            <div class="partners-grid">
+                <div class="partner-box">
+                    <i class="fa-solid fa-scale-balanced"></i> Courts & Legal
+                </div>
+                <div class="partner-box">
+                    <i class="fa-solid fa-users"></i> HR Agencies
+                </div>
+                <div class="partner-box">
+                    <i class="fa-solid fa-shield-halved"></i> Insurance
+                </div>
+                <div class="partner-box">
+                    <i class="fa-solid fa-building"></i> Government
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Roadmap -->
+        <div class="slide-container">
+            <h2>Roadmap</h2>
+            <div class="roadmap-steps">
+                <div class="step">
+                    <div class="step-dot"></div>
+                    <h4>Pilot</h4>
+                    <p>Edo & Delta State Launch</p>
+                </div>
+                <div class="step">
+                    <div class="step-dot"></div>
+                    <h4>Mobile</h4>
+                    <p>iOS & Android Apps Biometric ID</p>
+                </div>
+                <div class="step">
+                    <div class="step-dot"></div>
+                    <h4>Expansion</h4>
+                    <p>
+                        Lagos, Abuja, Port Hacourt, Aba, Onitsha, Kaduna, Kano
+                    </p>
+                </div>
+                <div class="step">
+                    <div class="step-dot"></div>
+                    <h4>Africa</h4>
+                    <p>Ghana, Kenya, South Africa</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: The Ask -->
+        <div class="slide-container">
+            <div class="center-content">
+                <h2 style="font-size: 60px; margin-bottom: 20px">The Ask</h2>
+                <h1 style="font-size: 140px; color: #38bdf8">$100,000</h1>
+                <p style="font-size: 32px; color: #fff">Pre-Seed SAFE Note</p>
+                <div
+                    style="
+                        margin-top: 60px;
+                        display: flex;
+                        gap: 40px;
+                        justify-content: center;
+                    "
+                >
+                    <div class="card-bg">Marketing (30%)</div>
+                    <div class="card-bg">Operations (30%)</div>
+                    <div class="card-bg">Product (15%)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Team -->
+        <div class="slide-container">
+            <h2>The Team</h2>
+            <div class="team-grid center-content" style="align-items: center">
+                <div class="team-member">
+                    <!-- Ensure image_9dccbe.jpg is in the folder -->
+                    <img
+                        src="images/file.enc"
+                        class="team-img"
+                        alt="Jude Ero"
+                    />
+                    <h3>Jude Ero</h3>
+                    <div class="team-role">CEO</div>
+                    <p style="font-size: 18px; margin-top: 10px">
+                        2x Founder.
+                        <span> Tech lead | Operations | Marketing</span>
+                    </p>
+                    <p>https://www.linkedin.com/in/judeomonuwaero/</p>
+                </div>
+                <div class="team-member">
+                    <img
+                        src="images/tobore2.jpg"
+                        class="team-img"
+                        alt="Tobore"
+                    />
+                    <h3>Tobore Aletor LLB</h3>
+                    <div class="team-role">Legal & Compliance</div>
+                    <p style="font-size: 18px; margin-top: 10px">
+                        Regulatory compliance | Partnerships.
+                    </p>
+                    <p>https://www.linkedin.com/in/estheraletor</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Contact -->
+        <div
+            class="slide-container"
+            style="
+                background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            "
+        >
+            <div class="center-content">
+                <h2>Let's Build The Future Of Digital Trust.</h2>
+                <!--<div style="margin-top: 60px">
+                    <p style="font-size: 28px; color: #fff">
+                        <i
+                            class="fa-solid fa-envelope"
+                            style="color: #38bdf8; margin-right: 10px"
+                        ></i>
+                        contact@inkless.africa
+                    </p>
+                    <p style="font-size: 28px; color: #fff">
+                        <i
+                            class="fa-solid fa-globe"
+                            style="color: #38bdf8; margin-right: 10px"
+                        ></i>
+                        www.inkless.africa
+                    </p>
+                </div>-->
+            </div>
+        </div>
+    </body>
+</html>
